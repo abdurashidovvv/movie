@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:movie/data/model/movie_model.dart';
+import 'package:movie/presentation/ui/carousel_slider/movie_carousel.dart';
 import 'package:movie/presentation/ui/drawer/drawer_header.dart';
 import 'package:movie/presentation/ui/drawer/drawer_menu.dart';
 import '../bloc/movie_bloc.dart';
@@ -12,6 +14,13 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends State<MovieScreen> {
   GlobalKey<SliderDrawerState> _key = GlobalKey<SliderDrawerState>();
+
+  List<MovieModel> movies = [
+    MovieModel(title: "title", overView: "overView", posterPath: "posterPath"),
+    MovieModel(title: "title", overView: "overView", posterPath: "posterPath"),
+    MovieModel(title: "title", overView: "overView", posterPath: "posterPath"),
+    MovieModel(title: "title", overView: "overView", posterPath: "posterPath"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,9 @@ class _MovieScreenState extends State<MovieScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             MovieDrawerHeader(),
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             Column(
               children: [
                 DrawerMenu(title: "Home", icon: Icons.home),
@@ -50,7 +61,7 @@ class _MovieScreenState extends State<MovieScreen> {
           ],
         ),
       ),
-      child: Container(color: Colors.grey),
+      child: MovieCarousel()
     ));
   }
 }
