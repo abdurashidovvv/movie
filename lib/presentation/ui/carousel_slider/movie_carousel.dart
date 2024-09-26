@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:movie/data/model/movie_model.dart';
+import 'package:movie/domain/entity/movie_entity.dart';
 
 class MovieCarousel extends StatelessWidget {
-  final List<MovieModel> movies;
+  final List<MovieEntity> movies;
   const MovieCarousel({super.key, required this.movies});
 
   @override
