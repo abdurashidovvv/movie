@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:movie/data/model/movie_model.dart';
 
 class MovieCarousel extends StatelessWidget {
-  const MovieCarousel({super.key});
+  final List<MovieModel> movies;
+  const MovieCarousel({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      options: CarouselOptions(height: 400.0),
-      items: [1,2,3,4,5].map((i) {
+      options: CarouselOptions(
+          height: 300.0, enlargeCenterPage: true, viewportFraction: 0.6),
+      items: movies.map((movie) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: const BoxDecoration(
-                    color: Colors.amber
-                ),
-                child: Text('text $i', style: const TextStyle(fontSize: 16.0),)
-            );
+                width: 300,
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: const BoxDecoration(color: Colors.amber),
+                child: Text(
+                  'Title: ${movie.title}',
+                  style: const TextStyle(fontSize: 16.0),
+                ));
           },
         );
       }).toList(),

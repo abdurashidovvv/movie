@@ -61,7 +61,13 @@ class _MovieScreenState extends State<MovieScreen> {
           ],
         ),
       ),
-      child: MovieCarousel()
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MovieCarousel(movies: movies),
+        ],
+      )
     ));
   }
 }
