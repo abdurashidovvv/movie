@@ -8,6 +8,8 @@ import '../bloc/movie_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieScreen extends StatefulWidget {
+  const MovieScreen({super.key});
+
   @override
   State<MovieScreen> createState() => _MovieScreenState();
 }
@@ -38,7 +40,7 @@ class _MovieScreenState extends State<MovieScreen> {
           return SliderDrawer(
               key: _key,
               appBar: const SliderAppBar(
-                appBarColor: Colors.grey,
+                appBarColor: Colors.black54,
                 title: Text(
                   "Movies",
                   style: TextStyle(
@@ -74,12 +76,26 @@ class _MovieScreenState extends State<MovieScreen> {
                   ],
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MovieCarousel(movies: state.movies),
-                ],
+              child: Container(
+                color: Colors.black54,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Trends",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(height: 20),
+                      MovieCarousel(movies: state.movies),
+                    ],
+                  ),
+                ),
               ));
         } else {
           return const Center(child: Text("It has an error"));
