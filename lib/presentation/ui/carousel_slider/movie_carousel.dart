@@ -18,7 +18,7 @@ class MovieCarousel extends StatelessWidget {
             return Container(
                 width: 300,
                 margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(color: Colors.black87, borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

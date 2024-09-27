@@ -38,65 +38,65 @@ class _MovieScreenState extends State<MovieScreen> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is MovieLoaded) {
           return SliderDrawer(
-              key: _key,
-              appBar: const SliderAppBar(
-                appBarColor: Colors.black54,
-                title: Text(
-                  "Movies",
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700),
-                ),
+            key: _key,
+            appBar: const SliderAppBar(
+              appBarColor: Colors.black,
+              title: Text(
+                "Movies",
+                style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700),
               ),
-              slider: Container(
-                color: Colors.black87,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 50, horizontal: 15),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+            ),
+            slider: Container(
+              color: Colors.black87,
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 15),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  MovieDrawerHeader(),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Column(
+                    children: [
+                      DrawerMenu(title: "Home", icon: Icons.home),
+                      SizedBox(height: 20),
+                      DrawerMenu(title: "Movies", icon: Icons.movie),
+                      SizedBox(height: 20),
+                      DrawerMenu(title: "TV Series", icon: Icons.tv),
+                      SizedBox(height: 20),
+                      DrawerMenu(title: "Settings", icon: Icons.settings),
+                      SizedBox(height: 20),
+                      DrawerMenu(title: "Info", icon: Icons.info),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            child: Container(
+              color: Colors.black, // Asosiy kontentning fon rangi
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MovieDrawerHeader(),
-                    SizedBox(
-                      height: 50,
+                    const Text(
+                      "Trends",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700),
                     ),
-                    Column(
-                      children: [
-                        DrawerMenu(title: "Home", icon: Icons.home),
-                        SizedBox(height: 20),
-                        DrawerMenu(title: "Movies", icon: Icons.movie),
-                        SizedBox(height: 20),
-                        DrawerMenu(title: "TV Series", icon: Icons.tv),
-                        SizedBox(height: 20),
-                        DrawerMenu(title: "Settings", icon: Icons.settings),
-                        SizedBox(height: 20),
-                        DrawerMenu(title: "Info", icon: Icons.info),
-                      ],
-                    )
+                    const SizedBox(height: 10),
+                    MovieCarousel(movies: state.movies), // MovieCarousel qismi
                   ],
                 ),
               ),
-              child: Container(
-                color: Colors.black54,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Trends",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(height: 20),
-                      MovieCarousel(movies: state.movies),
-                    ],
-                  ),
-                ),
-              ));
+            ),
+          );
         } else {
           return const Center(child: Text("It has an error"));
         }
