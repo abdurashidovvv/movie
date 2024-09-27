@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/presentation/bloc/movie_bloc.dart';
+import 'package:movie/presentation/bloc/movie/movie_bloc.dart';
+import 'package:movie/presentation/bloc/tv_show/tv_show_bloc.dart';
+import 'package:movie/presentation/bloc/tv_show/tv_show_event.dart';
 import 'package:movie/presentation/ui/movie_screen.dart';
 
-import 'data/repository/MovieRepository.dart';
+import 'data/repository/movie_repository.dart';
+import 'data/repository/tv_show_repository.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final TvShowRepository tvShowRepository = TvShowRepository();
+  final MovieRepository movieRepository = MovieRepository();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: BlocProvider(
-          create: (context) => MovieBloc(MovieRepository()),
-          child: MovieScreen(),
-        ),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<TvShowBloc>(
+              create: (context) =>
+                  TvShowBloc(tvShowRepository)..add(FetchPopularTvShows())),
+          BlocProvider<MovieBloc>(
+              create: (context) =>
+                  MovieBloc(movieRepository)..add(FetchTrendingMovies()))
+        ],
+        child: MaterialApp(
+          showSemanticsDebugger: false,
+          title: "Movies",
+          home: MovieScreen(),
+        ));
   }
 }

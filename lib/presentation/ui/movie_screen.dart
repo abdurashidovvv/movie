@@ -4,7 +4,8 @@ import 'package:movie/data/model/movie_model.dart';
 import 'package:movie/presentation/ui/carousel_slider/movie_carousel.dart';
 import 'package:movie/presentation/ui/drawer/drawer_header.dart';
 import 'package:movie/presentation/ui/drawer/drawer_menu.dart';
-import '../bloc/movie_bloc.dart';
+import 'package:movie/presentation/ui/tv_shows/tv_shows.dart';
+import '../bloc/movie/movie_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -91,7 +92,8 @@ class _MovieScreenState extends State<MovieScreen> {
                           fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 10),
-                    MovieCarousel(movies: state.movies), // MovieCarousel qismi
+                    MovieCarousel(movies: state.movies), 
+                    TvShows(shows: )// MovieCarousel qismi
                   ],
                 ),
               ),

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../data/repository/MovieRepository.dart';
-import '../../domain/entity/movie_entity.dart';
+import '../../../data/repository/movie_repository.dart';
+import '../../../domain/entity/movie_entity.dart';
 
 // States
 abstract class MovieState extends Equatable {
