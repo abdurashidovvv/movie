@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
                   MovieBloc(movieRepository)..add(FetchTrendingMovies()))
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           showSemanticsDebugger: false,
           title: "Movies",
           home: MovieScreen(),

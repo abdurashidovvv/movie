@@ -31,9 +31,7 @@ class _MovieScreenState extends State<MovieScreen> {
           title: Text(
             "Movies & TV Shows",
             style: TextStyle(
-                fontSize: 22,
-                color: Colors.white,
-                fontWeight: FontWeight.w700),
+                fontSize: 22, color: Colors.white, fontWeight: FontWeight.w700),
           ),
         ),
         slider: Container(
@@ -72,7 +70,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Trends",
+                    "Trending Movies",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,
@@ -86,7 +84,9 @@ class _MovieScreenState extends State<MovieScreen> {
                       } else if (state is MovieLoaded) {
                         return MovieCarousel(movies: state.movies);
                       } else if (state is MovieError) {
-                        return Center(child: Text(state.message, style: TextStyle(color: Colors.red)));
+                        return Center(
+                            child: Text(state.message,
+                                style: TextStyle(color: Colors.red)));
                       } else {
                         return const SizedBox.shrink();
                       }
@@ -106,9 +106,14 @@ class _MovieScreenState extends State<MovieScreen> {
                       if (state is TvShowLoading) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is TvShowLoaded) {
-                        return TvShows(shows: state.tvShows);
+                        return TvShows(
+                          shows: state.tvShows,
+                          onTap: (show) {},
+                        );
                       } else if (state is TvShowError) {
-                        return Center(child: Text(state.message, style: TextStyle(color: Colors.red)));
+                        return Center(
+                            child: Text(state.message,
+                                style: TextStyle(color: Colors.red)));
                       } else {
                         return const SizedBox.shrink();
                       }
