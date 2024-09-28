@@ -4,6 +4,7 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/data/model/movie_model.dart';
 import 'package:movie/presentation/ui/carousel_slider/movie_carousel.dart';
+import 'package:movie/presentation/ui/detail_screen.dart';
 import 'package:movie/presentation/ui/drawer/drawer_header.dart';
 import 'package:movie/presentation/ui/drawer/drawer_menu.dart';
 import 'package:movie/presentation/ui/tv_shows/tv_shows.dart';
@@ -108,7 +109,17 @@ class _MovieScreenState extends State<MovieScreen> {
                       } else if (state is TvShowLoaded) {
                         return TvShows(
                           shows: state.tvShows,
-                          onTap: (show) {},
+                          onTap: (show) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailScreen(
+                                  show: show,
+                                  movie: null,
+                                ),
+                              ),
+                            );
+                          },
                         );
                       } else if (state is TvShowError) {
                         return Center(
