@@ -67,7 +67,7 @@ class TvShows extends StatelessWidget {
                               overflow: TextOverflow.visible,
                             ),
                             Text(
-                              'Rating: ${show.rating}',
+                              'Rating: ${show.vote_average}',
                               style: const TextStyle(
                                   fontSize: 14.0,
                                   color: Colors.white70,
