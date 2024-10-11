@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/data/model/movie_model.dart';
+import 'package:movie/data/model/tv_show.dart';
 import 'package:movie/presentation/ui/carousel_slider/movie_carousel.dart';
-import 'package:movie/presentation/ui/detail_screen.dart';
+import 'package:movie/presentation/ui/show_detail_screen.dart';
 import 'package:movie/presentation/ui/drawer/drawer_header.dart';
 import 'package:movie/presentation/ui/drawer/drawer_menu.dart';
+import 'package:movie/presentation/ui/movie_detail_screen.dart';
 import 'package:movie/presentation/ui/tv_shows/tv_shows.dart';
 import '../bloc/movie/movie_bloc.dart';
 import '../bloc/tv_show/tv_show_bloc.dart';
@@ -21,6 +23,7 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends State<MovieScreen> {
   final GlobalKey<SliderDrawerState> _key = GlobalKey<SliderDrawerState>();
+  bool _isNavigating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +86,23 @@ class _MovieScreenState extends State<MovieScreen> {
                       if (state is MovieLoading) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is MovieLoaded) {
-                        return MovieCarousel(movies: state.movies);
+                        return MovieCarousel(
+                          movies: state.movies,
+                          onTap: (movie) async {
+                            if (!_isNavigating) {
+                              _isNavigating =
+                                  true; // Navigatsiya jarayoni boshlandi
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>MovieDetailScreen(),
+                                ),
+                              );
+                              _isNavigating =
+                                  false; // Navigatsiya jarayoni tugadi
+                            }
+                          },
+                        );
                       } else if (state is MovieError) {
                         return Center(
                             child: Text(state.message,
@@ -115,7 +134,6 @@ class _MovieScreenState extends State<MovieScreen> {
                               MaterialPageRoute(
                                 builder: (context) => DetailScreen(
                                   show: show,
-                                  movie: null,
                                 ),
                               ),
                             );
@@ -124,7 +142,7 @@ class _MovieScreenState extends State<MovieScreen> {
                       } else if (state is TvShowError) {
                         return Center(
                             child: Text(state.message,
-                                style: TextStyle(color: Colors.red)));
+                                style: const TextStyle(color: Colors.red)));
                       } else {
                         return const SizedBox.shrink();
                       }

@@ -4,9 +4,8 @@ import 'package:movie/domain/entity/movie_entity.dart';
 
 class DetailScreen extends StatefulWidget {
   final TvShow? show;
-  final MovieEntity? movie;
 
-  const DetailScreen({super.key, required this.show, required this.movie});
+  const DetailScreen({super.key, required this.show});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -16,9 +15,6 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
-
-    final dynamic source = widget.show ?? widget.movie;
-
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -29,7 +25,7 @@ class _DetailScreenState extends State<DetailScreen> {
             Navigator.pop(context);
           },
         ),
-        title: Text(source.name ?? "",
+        title: Text(widget.show!.name ?? "",
             style: const TextStyle(
                 fontSize: 22,
                 color: Colors.white,
@@ -44,7 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.network(
-                  'https://image.tmdb.org/t/p/w500${source.posterPath}',
+                  'https://image.tmdb.org/t/p/w500${widget.show!.posterPath}',
                   width: 200,
                   height: 200,
                 ),
@@ -52,7 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Name of show: ${source.name}",
+                      Text("Name of show: ${widget.show!.name}",
                           softWrap: true,
                           overflow: TextOverflow.visible,
                           style: const TextStyle(
@@ -60,7 +56,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               fontSize: 16,
                               fontWeight: FontWeight.w400)),
                       const SizedBox(height: 10),
-                      Text("Vote average: ${source.vote_average}",
+                      Text("Vote average: ${widget.show!.vote_average}",
                           softWrap: true,
                           overflow: TextOverflow.visible,
                           style: const TextStyle(
@@ -68,7 +64,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               fontSize: 16,
                               fontWeight: FontWeight.w400)),
                       const SizedBox(height: 10),
-                      Text("Vote count:${source.vote_count}",
+                      Text("Vote count:${widget.show!.vote_count}",
                           softWrap: true,
                           overflow: TextOverflow.visible,
                           style: const TextStyle(
@@ -93,7 +89,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontWeight: FontWeight.w800)),
                   const SizedBox(height: 10),
                   Text(
-                    source.over_view ?? "",
+                    widget.show!.over_view ?? "",
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
