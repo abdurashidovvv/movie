@@ -14,14 +14,14 @@ class MovieCarousel extends StatelessWidget {
       options: CarouselOptions(
           height: 300.0, enlargeCenterPage: true, viewportFraction: 0.6),
       items: movies.map((movie) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-                width: 300,
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
-                child: GestureDetector(
-                  onTap: onTap(movie),
+        return GestureDetector(
+          onTap: onTap(movie),
+          child: Builder(
+            builder: (BuildContext context) {
+              return Container(
+                  width: 300,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -72,7 +72,7 @@ class MovieCarousel extends StatelessWidget {
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          movie.overView.substring(0, 50),
+                          movie.overView.substring(0, 30),
                           style: const TextStyle(
                               fontSize: 14.0,
                               color: Colors.white70,
@@ -80,9 +80,9 @@ class MovieCarousel extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                ));
-          },
+                  ));
+            },
+          ),
         );
       }).toList(),
     );
